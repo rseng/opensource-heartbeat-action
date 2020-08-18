@@ -1,0 +1,30 @@
+# action.yml
+name: 'Open Source Heartbeat Interface'
+description: 'Create an interface for open source events on GitHub.'
+branding:
+  icon: 'heart'
+  color: 'red'
+inputs:
+  users_file:
+    description: 'This is the relative path in the repository for the users.txt (or other named file) that includes GitHub user names for users to include for parsin GitHub events.'
+    required: true
+    default: 'users.txt'
+  exclude_users_file:
+    description: 'The relative path in the repository for the exclude-users.txt (or other named file) for users to not include if discovered programatically.'
+    required: true
+    default: 'exclude-users.txt'
+  query:
+    description: 'A user query to run before updating the users_file. If left blank, won't be updated.'
+    required: false
+  collection:
+    description: 'The collections folder under docs to write events to. Defaults to _events.'
+    default: _events
+  token:
+    description: >
+      Auth token used to fetch the repository.
+    default: ${{ github.token }}
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    GITHUB_TOKEN: ${{ inputs.token }}

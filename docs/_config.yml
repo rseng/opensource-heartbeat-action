@@ -1,0 +1,28 @@
+# Setup
+title:        Open Source Heartbeat
+tagline:      "showcase open source contributions for your users/organization"
+baseurl:      "/opensource-heartbeat-action"
+github:       "https://github.com/rseng/opensource-heartbeat-action"
+
+# About/contact
+author:
+  name:       "@vsoch"
+  url:        https://vsoch.github.io/
+
+# Collections
+collections:
+    events:
+      output: false
+      permalink: /:collection/:title/
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+#Others
+markdown: kramdown
