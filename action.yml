@@ -17,7 +17,7 @@ inputs:
     required: true
     default: 'exclude-users.txt'
   query:
-    description: 'A user query to run before updating the users_file. If left blank, won't be updated.'
+    description: 'A user query to run before updating the users_file. If left blank, will not be updated.'
     required: false
   collection:
     description: 'The collections folder under docs to write events to. Defaults to _events.'
