@@ -335,6 +335,7 @@ def main():
 
     # Get events, organized by type to write tomarkdown
     events = {}
+    org_events = {}
     if os.path.exists(USERS_FILE):
         users = get_users(USERS_FILE)
         events = get_user_events(users)
