@@ -61,6 +61,13 @@ usernameN
 If you define the `query` variable this file will be updated, or created first
 if it doesn't exist.
 
+### `orgs_file`
+
+**Optional** If you want to add contributions based on organizations, you can
+define an `orgs_file` which defaults to orgs.txt. The format is the same as 
+the `users_file`. If you don't define this variable, parsing organization
+events will be skipped.
+
 ### `query`
 
 **Optional** If defined, we will use [update-users.py](scripts/update-users.py)
@@ -138,7 +145,7 @@ release.
     - name: Checkout Code
       uses: actions/checkout@v2
     - name: Generate OpenSource Heartbeat Interface
-      uses: rseng/opensource
+      uses: rseng/opensource-heartbeat-action@master
       with:
         users_file: 'users.txt'
         collection: 'docs/_events'
@@ -146,8 +153,23 @@ release.
         token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+If you want to just include a subset of organizations (and not parse individual
+users) then you can leave out the query, and don't define the users file.
+
+```yaml
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Generate OpenSource Heartbeat Interface
+      uses: rseng/opensource-heartbeat-action@master
+      with:
+        orgs_file: 'orgs.txt'
+        collection: 'docs/_events'
+        token: ${{ secrets.GITHUB_TOKEN }}
+```
 
 ## Questions
+
 
 ## How do I customize the interface?
 

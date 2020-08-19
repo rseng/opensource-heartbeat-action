@@ -9,6 +9,9 @@ inputs:
     description: 'This is the relative path in the repository for the users.txt (or other named file) that includes GitHub user names for users to include for parsin GitHub events.'
     required: true
     default: 'users.txt'
+  orgs_file:
+    description: "A list of organizations to include contributions for, not updated automatically."
+    default: "orgs.txt"
   exclude_users_file:
     description: 'The relative path in the repository for the exclude-users.txt (or other named file) for users to not include if discovered programatically.'
     required: true

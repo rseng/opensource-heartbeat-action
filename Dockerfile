@@ -6,6 +6,6 @@ ENV GITHUB_PAGES=/github/workspace/docs
 COPY ./scripts/entrypoint.sh /entrypoint.sh
 COPY ./scripts/generate-events.py /generate-events.py
 COPY ./docs /docs
-RUN rm -rf /docs/_issues && ls /docs
+RUN rm -rf /docs/_events && ls /docs
 WORKDIR /github/workspace
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
