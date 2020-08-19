@@ -37,11 +37,21 @@ And finally, a chart shows a summary of contributions.
 ## Getting Started
 
 If you have a custom set of users or organizations, you'll need to first generate a 
-users.txt file (or a differently named file that you'll specify as the `users_file` for your action.
+users.txt file (or a differently named file that you'll specify as the `users_file` for your action
+and/or an orgs.txt file (for the `orgs_file` to specify organizations to use).
 As an alternative, you can have this file generated or updated via the GitHub action first
 by specifying the `query` argument. For help building your query, it's recommended to try
 your search in the [GitHub Advanced](https://github.com/search/advanced) view. For example,
 to search users for the location being "Stanford" I might use the query `location%3AStanford`.
+
+To summarize, you'll need to:
+
+ 1. Add A GitHub workflow for your run, you can see examples in the [examples](examples) folder.
+ 2. Run the workflow as you have set up to generate the docs/ folder.
+ 3. Update the _config.yml in the docs folder to have the correct baseurl for your site.
+
+Once the docs folder is added to your repository via a pull request, it won't be generated
+again, so you are free to customize it as you like.
 
 ## Inputs
 
