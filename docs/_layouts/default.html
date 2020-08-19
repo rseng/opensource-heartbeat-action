@@ -7,7 +7,7 @@
     {% include page-header.html %}
     <br><br>
 <header>
-  <h1>Open Source Heartbeat{% if site.subtitle %}{{ site.subtitle }}{% endif %}</h1>
+  <h1>{% if page.title %}{{ page.title }}{% else %}Open Source Heartbeat{% endif %}{% if site.subtitle %}{{ site.subtitle }}{% endif %}</h1>
    {% include heart.html %}
 </header>
    {{ content }}

@@ -11,7 +11,28 @@ This means that you can use the action in your workflows too,
 and choose how often / when to run it, and how to update your GitHub pages.
 Continue reading to learn more.
 
+## Interface
+
+The main page shows a sortable view of the top 100 new contributions. You can
+filter down to a contribution type, or click on browse to see a subset of that type.
+
 ![img/open-source-heartbeat.png](img/open-source-heartbeat.png)
+
+
+Here is the browse view.
+
+![img/browse.png](img/browse.png)
+
+
+And here is looking at an archive for a contribution type. Archives are linked from
+the browse page.
+
+![img/archive.png](img/archive.png)
+
+And finally, a chart shows a summary of contributions.
+
+![img/chart.png](img/chart.png)
+
 
 ## Getting Started
 
@@ -147,4 +168,7 @@ you should be able to customize or otherwise update the template
 to your liking. The folder won't be edited if it already exists
 beyond the _events folder.
 
-Do you have an example? Please contribute by opening an issue or a pull request!
+## Future Wants
+
+It would be nice to have the ability to see charts by year (e.g., to determine
+contribution changes over the years).
