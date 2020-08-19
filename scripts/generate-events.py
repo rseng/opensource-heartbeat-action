@@ -299,8 +299,13 @@ def write_events(events, output_dir):
             # Output to ../docs/_issues
             print(f"Writing {filename}")
             with open(filename, "w") as filey:
-                filey.writelines(content)
-            files.add(filename)
+                try:
+                    filey.writelines(content)
+                except UnicodeEncodeError:
+                    filey.writelines(content.encode("utf-8"))
+                except:
+                    print(f"Issue with writing {filename}", skipping)
+                files.add(filename)
 
 
 def main():
