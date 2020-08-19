@@ -301,10 +301,9 @@ def write_events(events, output_dir):
             with open(filename, "w") as filey:
                 try:
                     filey.writelines(content)
-                except UnicodeEncodeError:
-                    filey.writelines(content.encode("utf-8"))
                 except:
                     print(f"Issue with writing {filename}", skipping)
+                    pass
                 files.add(filename)
 
 
