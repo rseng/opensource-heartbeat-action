@@ -200,6 +200,13 @@ you should be able to customize or otherwise update the template
 to your liking. The folder won't be edited if it already exists
 beyond the _events folder.
 
+## Showcase
+
+If you use the action and want to share, please open a pull request to add your repository here!
+
+ - [Stanford Opensource Heartbeat](https://stanford-rc.github.io/opensource-stanford/)
+ - [vsoch Opensource Heartbeat](https://vsoch.github.io/opensource-heartbeat/)
+
 ## Future Wants
 
 It would be nice to have the ability to see charts by year (e.g., to determine

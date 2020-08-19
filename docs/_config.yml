@@ -2,7 +2,7 @@
 title:        Open Source Heartbeat
 tagline:      "showcase open source contributions for your users/organization"
 baseurl:      "/opensource-heartbeat-action"
-github:       "https://github.com/rseng/opensource-heartbeat-action"
+github_repo:  "https://github.com/rseng/opensource-heartbeat-action"
 
 # About/contact
 author:
