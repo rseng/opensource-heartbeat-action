@@ -302,7 +302,7 @@ def write_events(events, output_dir):
                 try:
                     filey.writelines(content)
                 except:
-                    print(f"Issue with writing {filename}", skipping)
+                    print(f"Issue with writing {filename}, skipping")
                     pass
                 files.add(filename)
 
