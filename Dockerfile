@@ -5,6 +5,7 @@ RUN pip3 install requests
 ENV GITHUB_PAGES=/github/workspace/docs
 COPY ./scripts/entrypoint.sh /entrypoint.sh
 COPY ./scripts/generate-events.py /generate-events.py
+COPY ./scripts/update-users.py /update-users.py
 COPY ./docs /docs
 RUN rm -rf /docs/_events && ls /docs
 WORKDIR /github/workspace

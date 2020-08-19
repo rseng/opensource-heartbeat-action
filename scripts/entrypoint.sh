@@ -8,6 +8,12 @@ if [ -z "${INPUT_COLLECTION}" ]; then
     INPUT_COLLECTION="_events"
 fi
 
+# If a query is defined, update the users file
+if [ ! -z "${INPUT_QUERY}" ]; then
+    printf "Updating users using query: ${INPUT_QUERY}\n"
+    python3 /update-users.py --user-query "${INPUT_QUERY}";
+fi
+
 # If the docs folder isn't created, do so.
 if [ ! -d "/github/workspace/docs" ]; then
     printf "Creating docs folder for GitHub pages\n"
