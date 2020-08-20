@@ -235,6 +235,9 @@ def generate_content(event, user, seen):
             "<a href='https://github.com/%s' target='_blank'>%s</a> <a href='%s' target='_blank'>reviewed</a> a <a href='%s' target='_blank'>%s pull request</a>\n\n<small>%s</small>\n\n<a href='%s' target='_blank'>View Review</a>"
             % (user, user, url, pull_request_url, repo_name, body, url)
         )
+    else:
+        print(f"Event type {event_type} not supported!")
+        return None
 
     # Include front end matter for jekyll
     content = "---\n"
