@@ -21,8 +21,10 @@ if [ ! -d "/github/workspace/docs" ]; then
 fi
 
 # Cleanup old set of first issues
-printf "Cleaning up previous events...\n"
-rm -rf "/github/workspace/docs/${INPUT_COLLECTION}"
+if [ ! -z "${INPUT_CLEANUP}" ]; then
+    printf "Cleaning up previous events...\n"
+    rm -rf "/github/workspace/docs/${INPUT_COLLECTION}"
+fi
 export INPUT_COLLECTION
 
 # Generate Stanford Issues

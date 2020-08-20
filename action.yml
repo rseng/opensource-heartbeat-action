@@ -16,6 +16,9 @@ inputs:
     description: 'The relative path in the repository for the exclude-users.txt (or other named file) for users to not include if discovered programatically.'
     required: true
     default: 'exclude-users.txt'
+  cleanup:
+    description: 'If defined, clean up the previous folder (removing previous events) If not defined, skip cleanup.'
+    required: false
   query:
     description: 'A user query to run before updating the users_file. If left blank, will not be updated.'
     required: false
