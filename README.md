@@ -88,6 +88,11 @@ For help building your query, it's recommended to try your search in the
 is not defined, the update will be skipped, and you will be required to already
 have a users.txt file.
 
+### `cleanup`
+
+If defined as anything, clean up the previous collection folder before generating
+new events. If not defined, skip cleanup entirely (old events will be preserved).
+
 ### `exclude_users_file`
 
 **Optional** The path to the exclude-users.txt (or otherwise named) file that has
