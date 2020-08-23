@@ -130,13 +130,13 @@ def generate_content(event, user, seen):
     avatar = event["actor"]["avatar_url"]
 
     if user not in seen:
-        seen[user] = {"PushEvent": False, "IssueCommentEvent": False}
+        seen[user] = {"PushEvent": [], "IssueCommentEvent": []}
 
     # Only allow one push event, comment event, per repository
     for _type in ["PushEvent", "IssueCommentEvent"]:
-        if seen[user][_type] is True:
+        if repo_name in seen[user][_type]:
             return None
-        seen[user][_type] = True
+        seen[user][_type].append(repo_name)
 
     # Content for description on the kind of event
     if event_type == "PushEvent":
