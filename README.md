@@ -185,6 +185,12 @@ users) then you can leave out the query, and don't define the users file.
 
 ## Questions
 
+## Why do I only see 1 push event for my repository?
+
+For push and comment events, it might be the case that a user comments or pushes
+multiple times on a single repository. To be concise, we only add the first
+event of this type seen, per user and per repository. This means that the
+events that are generated are generally an underestimate of actual activity.
 
 ## How do I customize the interface?
 
