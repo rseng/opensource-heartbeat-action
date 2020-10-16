@@ -57,7 +57,7 @@ def get_parser():
 
 def get_headers():
     """Get headers with an authentication token if one is found in the
-       environment
+    environment
     """
     # Add token to increase API limits
     token = os.environ.get("GITHUB_TOKEN")
@@ -69,7 +69,7 @@ def get_headers():
 
 def search_users(query, search_type="users"):
     """Return a subset of users that match a particular query (up to 1000)
-       The example here searches for location Stanford
+    The example here searches for location Stanford
     """
 
     url = "https://api.github.com/search/%s?q=%s" % (search_type, query)
