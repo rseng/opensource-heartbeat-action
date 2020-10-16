@@ -67,8 +67,7 @@ def read_file(filename):
 
 
 def get_users(users_file):
-    """Given a users file, load it and return a list of users
-    """
+    """Given a users file, load it and return a list of users"""
     users = []
     if os.path.exists(users_file):
         users = [u for u in read_file(users_file).split("\n") if u]
@@ -194,19 +193,16 @@ def generate_content(event, user, seen):
         issue_state = event["payload"]["issue"]["state"]
         issue_title = event["payload"]["issue"]["title"]
         issue_body = event["payload"]["issue"]["body"].split("\n")[0] + "..."
-        description = (
-            "<a href='https://github.com/%s' target='_blank'>%s</a> %s issue <a href='%s' target='_blank'>%s#%s</a>.\n\n<p>%s</p><small>%s</small><a href='%s' target='_blank'>View Comment</a>"
-            % (
-                user,
-                user,
-                issue_state,
-                issue_url,
-                repo_name,
-                issue_number,
-                issue_title,
-                issue_body,
-                issue_url,
-            )
+        description = "<a href='https://github.com/%s' target='_blank'>%s</a> %s issue <a href='%s' target='_blank'>%s#%s</a>.\n\n<p>%s</p><small>%s</small><a href='%s' target='_blank'>View Comment</a>" % (
+            user,
+            user,
+            issue_state,
+            issue_url,
+            repo_name,
+            issue_number,
+            issue_title,
+            issue_body,
+            issue_url,
         )
         url = issue_url
 
@@ -228,7 +224,9 @@ def generate_content(event, user, seen):
         url = comment_url
 
     elif event_type == "PullRequestReviewEvent":
-        body = event["payload"]["review"]["body"].split("\n")[0] + "..."
+        body = event["payload"]["review"].get("body", "")
+        if body:
+            body = body.split("\n")[0] + "..."
         url = event["payload"]["review"]["_links"]["html"]["href"]
         pull_request_url = event["payload"]["pull_request"]["html_url"]
         description = (
@@ -258,7 +256,7 @@ def generate_content(event, user, seen):
 
 def write_events(events, output_dir):
     """Given a listing of events (associated with users) write them to markdown
-       files in the _events folder.
+    files in the _events folder.
     """
     # We will only allow one PushEvent per user, and not rewrite files
     seen = {}
