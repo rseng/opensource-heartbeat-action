@@ -139,6 +139,8 @@ def generate_content(event, user, seen):
 
     # Content for description on the kind of event
     if event_type == "PushEvent":
+        if not event["payload"]["commits"]:
+            return None
         commit_url = "%s/commit/%s" % (repo, event["payload"]["commits"][-1]["sha"])
         message = event["payload"]["commits"][-1]["message"]
         description = (
