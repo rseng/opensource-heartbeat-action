@@ -194,7 +194,8 @@ def generate_content(event, user, seen):
         issue_number = issue_url.split("/")[-1]
         issue_state = event["payload"]["issue"]["state"]
         issue_title = event["payload"]["issue"]["title"]
-        issue_body = event["payload"]["issue"].get('body', '').split("\n")[0] + "..."
+        issue_body = event["payload"]["issue"].get('body', '') or ""
+        issue_body = issue_body.split("\n")[0] + "..."
         description = "<a href='https://github.com/%s' target='_blank'>%s</a> %s issue <a href='%s' target='_blank'>%s#%s</a>.\n\n<p>%s</p><small>%s</small><a href='%s' target='_blank'>View Comment</a>" % (
             user,
             user,
