@@ -2,7 +2,7 @@
 
 """
 
-Copyright (C) 2020 Vanessa Sochat.
+Copyright (C) 2020-2022 Vanessa Sochat.
 
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
@@ -23,6 +23,9 @@ headers = {}
 token = os.environ.get("GITHUB_TOKEN")
 if token:
     headers = {"Authorization": f"token {token}"}
+
+ALLOWED_EVENTS = os.environ.get("INPUT_EVENTS").split(",") or ["all"]
+print(f"ALLOWED EVENTS: {ALLOWED_EVENTS}")
 
 
 def get_parser():
@@ -128,6 +131,9 @@ def generate_content(event, user, seen):
     event_type = event["type"]
     avatar = event["actor"]["avatar_url"]
 
+    if "all" not in ALLOWED_EVENTS and event_type not in ALLOWED_EVENTS:
+        return
+
     if user not in seen:
         seen[user] = {"PushEvent": [], "IssueCommentEvent": []}
 
@@ -194,18 +200,21 @@ def generate_content(event, user, seen):
         issue_number = issue_url.split("/")[-1]
         issue_state = event["payload"]["issue"]["state"]
         issue_title = event["payload"]["issue"]["title"]
-        issue_body = event["payload"]["issue"].get('body', '') or ""
+        issue_body = event["payload"]["issue"].get("body", "") or ""
         issue_body = issue_body.split("\n")[0] + "..."
-        description = "<a href='https://github.com/%s' target='_blank'>%s</a> %s issue <a href='%s' target='_blank'>%s#%s</a>.\n\n<p>%s</p><small>%s</small><a href='%s' target='_blank'>View Comment</a>" % (
-            user,
-            user,
-            issue_state,
-            issue_url,
-            repo_name,
-            issue_number,
-            issue_title,
-            issue_body,
-            issue_url,
+        description = (
+            "<a href='https://github.com/%s' target='_blank'>%s</a> %s issue <a href='%s' target='_blank'>%s#%s</a>.\n\n<p>%s</p><small>%s</small><a href='%s' target='_blank'>View Comment</a>"
+            % (
+                user,
+                user,
+                issue_state,
+                issue_url,
+                repo_name,
+                issue_number,
+                issue_title,
+                issue_body,
+                issue_url,
+            )
         )
         url = issue_url
 

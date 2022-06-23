@@ -78,6 +78,11 @@ define an `orgs_file` which defaults to orgs.txt. The format is the same as
 the `users_file`. If you don't define this variable, parsing organization
 events will be skipped.
 
+### `users_from_orgs_file`
+
+If you want to use an organization to look up public members, set this varaible.
+It will default to `user-orgs.txt` and be used if it's found.
+
 ### `query`
 
 **Optional** If defined, we will use [update-users.py](scripts/update-users.py)
@@ -107,6 +112,26 @@ username2
 ...
 usernameN
 ```
+
+### `events`
+
+A comma separated list of allowed events. By default, we use "all" to allow all events.
+Events include:
+
+- PushEvent
+- IssueCommentEvent
+- PullRequestEvent
+- CreateEvent
+- IssueCommentEvent
+- ReleaseEvent
+- IssuesEvent
+- PublicEvent
+- PullRequestReviewCommentEvent
+- PullRequestReviewEvent
+
+For example, maybe you are just interested in questions being asked by members of your
+orgs (or repos they need help or contribution to) - you would select the IssuesEvent.
+Or if you want to see contribution, you might choose the PullRequestEvent. It's up to you!
 
 ### `token`
 
@@ -215,8 +240,8 @@ beyond the _events folder.
 
 If you use the action and want to share, please open a pull request to add your repository here!
 
- - [Stanford Opensource Heartbeat](https://stanford-rc.github.io/opensource-stanford/)
  - [vsoch Opensource Heartbeat](https://vsoch.github.io/opensource-heartbeat/)
+ - [Stanford Opensource Heartbeat](https://stanford-rc.github.io/opensource-stanford/) (removed/404 when @vsoch left Stanford)
 
 ## Future Wants
 

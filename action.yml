@@ -9,6 +9,9 @@ inputs:
     description: 'This is the relative path in the repository for the users.txt (or other named file) that includes GitHub user names for users to include for parsin GitHub events.'
     required: true
     default: 'users.txt'
+  users_from_orgs_file:
+    description: "A list of organizations to find users from."
+    default: "user-orgs.txt"
   orgs_file:
     description: "A list of organizations to include contributions for, not updated automatically."
     default: "orgs.txt"
@@ -22,6 +25,9 @@ inputs:
   query:
     description: 'A user query to run before updating the users_file. If left blank, will not be updated.'
     required: false
+  events:
+    description: 'Comma separated list of event names to parse, defaults to parsing all events'
+    default: all
   collection:
     description: 'The collections folder under docs to write events to. Defaults to _events.'
     default: _events
