@@ -2,7 +2,7 @@
 
 """
 
-Copyright (C) 2020 Vanessa Sochat.
+Copyright (C) 2020-2022 Vanessa Sochat.
 
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
@@ -52,6 +52,13 @@ def get_parser():
         default=None,
     )
 
+    parser.add_argument(
+        "--org-users-file",
+        dest="org_users_file",
+        help="A filename with organization names to get public users from",
+        default=None,
+    )
+
     return parser
 
 
@@ -61,14 +68,31 @@ def get_headers():
     """
     # Add token to increase API limits
     token = os.environ.get("GITHUB_TOKEN")
-    headers = {}
+    headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers = {"Authorization": f"token {token}"}
     return headers
 
 
+def get_org_users(orgs):
+    """
+    Given a list of orgs, retrieve public users
+    """
+    users = []
+    for org in orgs:
+        org = org.strip()
+        if not org:
+            continue
+        res = requests.get(f"https://api.github.com/orgs/{org}/members")
+        if res.status_code != 200:
+            sys.exit(f"{response.status_code}: {response.reason}")
+        users += [x["login"] for x in res.json()]
+    return users
+
+
 def search_users(query, search_type="users"):
-    """Return a subset of users that match a particular query (up to 1000)
+    """
+    Return a subset of users that match a particular query (up to 1000)
     The example here searches for location Stanford
     """
 
@@ -103,38 +127,44 @@ def main():
     SKIP_USERS_FILE = args.exclude_users_file or os.environ.get(
         "INPUT_EXCLUDE_USERS_FILE", "exclude-users.txt"
     )
+    USERS_FROM_ORGS_FILE = args.org_users_file or os.environ.get(
+        "INPUT_USERS_FROM_ORGS_FILE", "org-users.txt"
+    )
 
     # Debugging for the user
     print(f"users file: {USERS_FILE}")
     print(f"skips file: {SKIP_USERS_FILE}")
+    print(f"users from orgs file {USERS_FROM_ORGS_FILE}")
 
     # Update users to file (so they can remove later)
     SEARCH_QUERY = os.environ.get("INPUT_QUERY", args.user_query)
 
-    if not SEARCH_QUERY:
-        sys.exit(
-            "You must define a --user-query to filter users. See https://github.com/search/advanced for help."
-        )
-
     users = []
     if os.path.exists(USERS_FILE):
         users = [u for u in read_file(USERS_FILE).split("\n") if u]
+
+    # Get public users for an org
+    if os.path.exists(USERS_FROM_ORGS_FILE):
+        users += get_org_users(read_file(USERS_FROM_ORGS_FILE).split("\n"))
+
+    # Unique
+    users = list(set(users))
 
     # If skip users is defined
     skip_users = []
     if os.path.exists(SKIP_USERS_FILE):
         skip_users = [u for u in read_file(USERS_FILE).split("\n") if u]
 
+    # To we want to further filter?
+    new_users = []
+    if SEARCH_QUERY:
+        new_users = search_users(SEARCH_QUERY)
+
+    users = users + new_users
+
     # Update users
-    new_users = [
-        user
-        for user in search_users(SEARCH_QUERY)
-        if user not in users and user not in skip_users
-    ]
-
-    print(f"Found {len(new_users)} new users!")
-    users += new_users
-
+    users = [user for user in users if user not in skip_users]
+    print(f"Found {len(new_users)} users!")
     write_file("\n".join(users), USERS_FILE)
 
 
