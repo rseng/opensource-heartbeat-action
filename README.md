@@ -241,7 +241,9 @@ beyond the _events folder.
 If you use the action and want to share, please open a pull request to add your repository here!
 
  - [vsoch Opensource Heartbeat](https://vsoch.github.io/opensource-heartbeat/)
+ - [rse-ops Opensource Heartbeat](https://rse-ops.github.io/opensource-heartbeat/)
  - [Stanford Opensource Heartbeat](https://stanford-rc.github.io/opensource-stanford/) (removed/404 when @vsoch left Stanford)
+ - **Coming soon** LLNL RADIUSS
 
 ## Future Wants
 
