@@ -1,4 +1,3 @@
-# action.yml
 name: 'Open Source Heartbeat Interface'
 description: 'Create an interface for open source events on GitHub.'
 branding:
@@ -32,8 +31,7 @@ inputs:
     description: 'The collections folder under docs to write events to. Defaults to _events.'
     default: _events
   token:
-    description: >
-      Auth token used to fetch the repository.
+    description: Auth token used to fetch the repository.
     default: ${{ github.token }}
 runs:
   using: 'docker'

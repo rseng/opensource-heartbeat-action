@@ -1,0 +1,20 @@
+name: Test Open Source Heartbeat Action
+on:
+  pull_request: []
+  push:
+    branches:
+      - main 
+ 
+jobs:
+  install-spack:
+    runs-on: ubuntu-latest
+    name: Install Spack
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Generate OpenSource Heartbeat Interface
+        uses: ./
+          with:
+            collection: 'docs/_events'
+            query: 'location%3AStanford'
+            token: ${{ secrets.GITHUB_TOKEN }}

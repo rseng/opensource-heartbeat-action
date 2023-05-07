@@ -2,7 +2,7 @@
 
 """
 
-Copyright (C) 2020-2022 Vanessa Sochat.
+Copyright (C) 2020-2023 Vanessa Sochat.
 
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
@@ -78,7 +78,6 @@ def get_users(users_file):
 
 
 def get_org_events(orgs):
-
     # We will lookup public events
     api_base = "https://api.github.com/orgs/{orgname}/events"
 
@@ -100,7 +99,6 @@ def get_org_events(orgs):
 
 
 def get_user_events(users):
-
     # We will lookup public events
     api_base = "https://api.github.com/users/{username}/events/public"
     # https://api.github.com/orgs/poldracklab/events
@@ -123,7 +121,6 @@ def get_user_events(users):
 
 
 def generate_content(event, user, seen):
-
     # Get shared metadata
     repo_name = event["repo"]["name"]
     repo = "https://github.com/%s" % repo_name
@@ -275,7 +272,6 @@ def write_events(events, output_dir):
     files = set()
     for user, eventlist in events.items():
         for event in eventlist:
-
             # We don't care about watching, forking, etc.
             # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
             if event["type"] in [
@@ -323,7 +319,6 @@ def write_events(events, output_dir):
 
 
 def main():
-
     parser = get_parser()
     args, extra = parser.parse_known_args()
 
