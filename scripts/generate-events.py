@@ -78,7 +78,6 @@ def get_users(users_file):
 
 
 def get_org_events(orgs):
-
     # We will lookup public events
     api_base = "https://api.github.com/orgs/{orgname}/events"
 
@@ -90,9 +89,11 @@ def get_org_events(orgs):
 
         # Cut out early if non-200 response
         if response.status_code != 200:
-            sys.exit(
-                "Error with response %s: %s" % (response.status_code, response.reason)
+            print(
+                "Error with %s: response %s: %s"
+                % (org, response.status_code, response.reason)
             )
+            continue
 
         events[org] = response.json()
 
@@ -100,7 +101,6 @@ def get_org_events(orgs):
 
 
 def get_user_events(users):
-
     # We will lookup public events
     api_base = "https://api.github.com/users/{username}/events/public"
     # https://api.github.com/orgs/poldracklab/events
@@ -123,7 +123,6 @@ def get_user_events(users):
 
 
 def generate_content(event, user, seen):
-
     # Get shared metadata
     repo_name = event["repo"]["name"]
     repo = "https://github.com/%s" % repo_name
@@ -275,7 +274,6 @@ def write_events(events, output_dir):
     files = set()
     for user, eventlist in events.items():
         for event in eventlist:
-
             # We don't care about watching, forking, etc.
             # https://docs.github.com/en/developers/webhooks-and-events/github-event-types
             if event["type"] in [
@@ -323,7 +321,6 @@ def write_events(events, output_dir):
 
 
 def main():
-
     parser = get_parser()
     args, extra = parser.parse_known_args()
 

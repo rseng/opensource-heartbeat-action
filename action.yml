@@ -12,6 +12,9 @@ inputs:
   users_from_orgs_file:
     description: "A list of organizations to find users from."
     default: "user-orgs.txt"
+  repos_file:
+    description: "A list of repos to get events for."
+    default: "repos.txt"
   orgs_file:
     description: "A list of organizations to include contributions for, not updated automatically."
     default: "orgs.txt"

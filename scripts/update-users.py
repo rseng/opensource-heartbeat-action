@@ -118,7 +118,6 @@ def write_file(content, filename):
 
 
 def main():
-
     parser = get_parser()
     args, extra = parser.parse_known_args()
 
