@@ -85,7 +85,8 @@ def get_org_users(orgs):
             continue
         res = requests.get(f"https://api.github.com/orgs/{org}/members")
         if res.status_code != 200:
-            sys.exit(f"{res.status_code}: {res.reason}")
+            print(f"{org} {res.status_code}: {res.reason}")
+            continue
         users += [x["login"] for x in res.json()]
     return users
 
